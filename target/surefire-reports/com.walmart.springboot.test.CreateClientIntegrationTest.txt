@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.walmart.springboot.test.CreateClientIntegrationTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.85 sec - in com.walmart.springboot.test.CreateClientIntegrationTest
