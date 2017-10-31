@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,6 @@ import com.walmart.springboot.utilities.WalmartException;
  * Walmart integration 
  */
 @Service
-@CacheConfig(cacheNames = "walmartCache")
 public class WalmartClient {
 	
 	/*
@@ -50,9 +48,9 @@ public class WalmartClient {
 	 * Avoid usging HardCodded category IDs!
 	 * Taxonomy Service are provided
 	 * 
-	 * @Cacheable, the cache policy is ehcache.xml under resource directory  
+	 * @Cacheable  
 	 */
-	@Cacheable
+	@Cacheable("BookCategoryId")
 	public String getBookCategoryId() throws WalmartException{
 		String walmartApiKey = walMartConfiguration.getApiKey();
 		 RestTemplate restTemplate = new RestTemplate();
@@ -67,9 +65,9 @@ public class WalmartClient {
 	/*
 	 * Get Book List to be used in Main Page
 	 * if maxIds is null, get first page!
-	 * @Cacheable, the cache policy is ehcache.xml under resource directory
+	 * @Cacheable
 	 */
-	@Cacheable
+	@Cacheable("BooksByMaxId")
 	public List<BookItem> getBooks(List<String> maxIds) throws RestClientException, WalmartException{
 		String bookCategId= getBookCategoryId();
 		List<BookItem> retVal = new ArrayList<BookItem>();
@@ -90,7 +88,7 @@ public class WalmartClient {
 	/*
 	 * Get Books with the specified restFul Service URi
 	 */
-	@Cacheable
+	@Cacheable("Books")
 	private List<BookItem> getBookswithURI(String uri) throws WalmartException {
 		RestTemplate restTemplate = new RestTemplate();
 		PaginatedItemList paginatedItemList = restTemplate.getForObject(uri, PaginatedItemList.class);
@@ -99,9 +97,9 @@ public class WalmartClient {
 
 	/*
 	 * Get BookDetail by ItemId
-	 * @Cacheable, the cache policy is ehcache.xml under resource directory
+	 * @Cacheable,
 	 */
-	@Cacheable
+	@Cacheable("BookDetail")
 	public BookItemDetail getBookDetail(String itemId) throws  RestClientException, WalmartException{
 		if(itemId== null || itemId.length()==0 ){
 			throw new WalmartException("itemId is mandatory");
@@ -114,19 +112,19 @@ public class WalmartClient {
 	/*
 	 * Get Customer Reviews of Item
 	 * This service is not available anymore -  30.10.17
-	 * @Cacheable, the cache policy is ehcache.xml under resource directory
+	 * @Cacheable,
 	 */
-	@Cacheable
+	@Cacheable("CustomerReviews")
 	public CustomerReviews getCustomerReviews(String itemId) throws   RestClientException, WalmartException{
 		RestTemplate restTemplate = new RestTemplate();
 		CustomerReviews customerReviews = restTemplate.getForObject(walMartConfiguration.getUri4CustomerReviews(itemId), CustomerReviews.class);
 		return customerReviews; 
 	}
 	
-	/*
-	 * This method is responsible for clearing the cache
-	 */
-	 @CacheEvict(allEntries = true)
-	 public void clearCache(){}
+//	/*
+//	 * This method is responsible for clearing the cache
+//	 */
+//	 @CacheEvict(allEntries = true)
+//	 public void clearCache(){}
 	
 }

@@ -53,9 +53,9 @@ public class WalmartController {
 			if(request.getSession().getAttribute("maxPages") != null &&
 					page != null && 
 					page!= 0 && 
-					(page + 1 >  (Integer) request.getSession().getAttribute("maxPages") ) 
-			   ){
-				
+					(page + 1 >  (Integer) request.getSession().getAttribute("maxPages") ))
+			{
+				// go to next book list batch!
 					/*
 					 * Store maxIds reached in the http session, 
 					 * thus The Paginated Products Service can be called again when needed 
@@ -66,8 +66,13 @@ public class WalmartController {
 					request.getSession().setAttribute("maxIds", maxIds);
 				
 			}
-			
+			else if (page != null && page!=0 && request.getSession().getAttribute("maxPages") !=null & page < (Integer) request.getSession().getAttribute("maxPages") ){
+				// stay with the same book list batch but change the page!  
+				List<String> maxIds = (List<String>) request.getSession().getAttribute("maxIds");
+				list = mc.getBooks(  ( maxIds.size() > 1  ?   maxIds.subList(0, maxIds.size() -1  ) : null )  );
+			}
 			else{
+				// this is for initial load!
 				list = mc.getBooks(null);
 				List<String> maxIds = new ArrayList<>();
 				maxIds.add( list.get(list.size()-1).getItemId() );
@@ -103,7 +108,8 @@ public class WalmartController {
 		model.addObject("maxPages", pagedListHolder.getPageCount());
 		request.getSession().setAttribute("maxPages",pagedListHolder.getPageCount());
 		
-		if(page == null || page < 1 || page > pagedListHolder.getPageCount()){
+		if(page == null || page < 1 ){
+			// || page > pagedListHolder.getPageCount()
 			    page = 1;
 			    /*
 			     * Be careful initial page is Zero - not One
