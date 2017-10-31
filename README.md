@@ -2,12 +2,12 @@
 SpringBoot and Maven have been used in developing the project,
 
 For a clean build and installation: 
-Run "mvn clean install" in the pom.xml file directory . It will also runs the UnitTests.
+Run "mvn clean install" in the pom.xml file directory . It will also run the UnitTests.
 
 In order to RUN the project: 
 Run "mvn spring-boot:run" in the pom.xml file directory.
 
-The application will serve in the following address: http://localhost:8080/
+The application will serve with the following address: http://localhost:8080/
 
 Please be sure your port (8080) is available before running the application.
 
