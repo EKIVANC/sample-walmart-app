@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CacheSetup implements JCacheManagerCustomizer {
 	
-
 	@Override
 	public void customize(javax.cache.CacheManager cacheManager) {
 		cacheManager.createCache("walmart", new MutableConfiguration<>()

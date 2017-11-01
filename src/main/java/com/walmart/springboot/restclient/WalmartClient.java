@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.cache.annotation.CacheResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -37,17 +35,11 @@ public class WalmartClient {
 	 */
 	@Autowired(required=true)
 	private WalMartConfiguration walMartConfiguration;
-	
-//	/*
-//	 *walMartConfiguration has to be provided to populate! 
-//	 */
-//	public WalmartClient(WalMartConfiguration walMartConfiguration) {
-//		this.walMartConfiguration = walMartConfiguration;
-//	}
+
 	
 	/*
 	 * Get Category ID Dynamically by the Walmart Service!
-	 * Avoid usging HardCodded category IDs!
+	 * Avoid using HardCodded category IDs!
 	 * Taxonomy Service are provided
 	 * 
 	 * @Cacheable  
@@ -114,7 +106,7 @@ public class WalmartClient {
 	/*
 	 * Get Customer Reviews of Item
 	 * This service is not available anymore -  30.10.17
-	 * Not Cahced
+	 * Not Cached now getting error: Http 500
 	 */
 	public CustomerReviews getCustomerReviews(String p_itemId) throws   RestClientException, WalmartException{
 		RestTemplate restTemplate = new RestTemplate();
