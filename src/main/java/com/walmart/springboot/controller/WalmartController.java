@@ -142,7 +142,7 @@ public class WalmartController {
 	public ModelAndView viewProductDetails(@PathVariable String itemId) {
 		ModelAndView model = new ModelAndView("productDetail");
 		/*
-		 * This client is responsible for making rest calls to walmart!
+		 * This client is for making rest calls to walmart!
 		 */
 		// WalmartClient mc = new WalmartClient(this.walMartConfiguration);
 		String errorMessage = null;
