@@ -52,13 +52,12 @@ public class WalmartController {
 		try {
 			
 			/*
-			 * Paging has three different function - initial load, fetch on current batch and add a new batch
+			 * Paging has two different functions - fetch on current batch and add a new batch
 			 *  
 			 */
 			// Add new Batch!
 			if (request.getSession().getAttribute("maxPages") != null  && 
-					page != null && page != 0 && 
-					(page + 1 > (Integer) request.getSession().getAttribute("maxPages"))) {
+					page != null  && (page + 1 > (Integer) request.getSession().getAttribute("maxPages"))) {
 				/*
 				 * Store maxIds reached in the http session, thus The Paginated
 				 * Products Service can be called again when needed
@@ -69,21 +68,22 @@ public class WalmartController {
 				request.getSession().setAttribute("maxIds", maxIds);
 
 			} 
-			// fetch on current batch
-			else if (page != null && page != 0 && request.getSession().getAttribute("maxPages") != null
-					&& page < (Integer) request.getSession().getAttribute("maxPages")) {
-				
+			// fetch on current batch or initial load
+			else {
 				List<String> maxIds = (List<String>) request.getSession().getAttribute("maxIds");
-				// never call cachable method with null values
-				list = mc.getBooks((maxIds.size() > 1 ? maxIds.subList(0, maxIds.size() - 1) : new ArrayList<>() ));
-			} else {
-				// Initial load!
-				List<String> maxIds = new ArrayList<>();
-				// since getBooks is cached by id, never send a null value!
-				list = mc.getBooks(maxIds);
-				maxIds.add(list.get(list.size() - 1).getItemId());
-				request.getSession().setAttribute("maxIds", maxIds);
-			}
+				if(maxIds == null ){
+					maxIds = new ArrayList<>();
+				}
+				// never call a cachable method with null values
+				list = mc.getBooks(( ( maxIds.size() > 1 )  ? maxIds.subList(0, maxIds.size() - 1) : new ArrayList<>() ));
+
+				// For Initial load!
+					if( maxIds.size()==0 || maxIds.contains(list.get(list.size() - 1).getItemId() ) == false) {
+						maxIds.add(list.get(list.size() - 1).getItemId());
+						request.getSession().setAttribute("maxIds", maxIds);
+					}
+				
+			} 
 
 			errorMessage = null;
 		} catch (Exception e) {
@@ -97,8 +97,7 @@ public class WalmartController {
 			e.printStackTrace();
 
 			/*
-			 * if errorMessage field is Setted, it will be displayed on page as
-			 * well
+			 * if errorMessage field is Setted, it will be displayed on page
 			 */
 			model.addObject("errorMessage", errorMessage);
 			return model;
