@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
 <html>
@@ -39,15 +40,35 @@
 								<div class="divTableRow">
 							</c:if>
 
-							<div class="card" onclick="location.href='productDetail/${listValue.itemId}';">
-								<img class="imageOfCard" src="${listValue.mediumImage}" alt="Avatar">
+							<div class="card"
+								onclick="location.href='productDetail/${listValue.itemId}';">
+								<img class="imageOfCard" src="${listValue.mediumImage}"
+									alt="Avatar" style="width: 170px; height: 190px">
 								<div class="container">
 									<h4>
-										<b>${listValue.name}</b>
+
+
+										<c:choose>
+											<c:when test="${fn:length(listValue.name) > 40}">
+												<b>${fn:substring(listValue.name, 0, 39)}</b>
+												<br />
+											</c:when>
+											<c:otherwise>
+												<b>${listValue.name}</b>
+												<br />
+											</c:otherwise>
+										</c:choose>
+
+
+<%-- 										<c:if test="">
+
+											<div class="divTableRow">
+										</c:if> --%>
+
 									</h4>
-									<h4>
+									<%-- <h4>
 										<b name="itemId">${listValue.itemId}</b>
-									</h4>
+									</h4> --%>
 									<p>\$${listValue.salePrice}</p>
 									<a href="productDetail/${listValue.itemId}">View Detail</a>
 									<%-- <p>${loop.count}</p>
@@ -86,14 +107,14 @@
 		<c:url value="/" var="next">
 			<c:param name="page" value="${page + 1}" />
 		</c:url>
-		
+
 		<%--AlWAYS SHOW NEXT <c:if test="${page + 1 <= maxPages}"> --%>
-			<a href='<c:out value="${next}" />' class="pn next">Next</a>
+		<a href='<c:out value="${next}" />' class="pn next">Next</a>
 		<%-- </c:if> --%>
 	</div>
 
 	</c:if>
-	
+
 	</form>
 	</div>
 

@@ -37,6 +37,8 @@ img {
 
 .container {
     padding: 2px 16px;
+    height:200px;
+    display: inline-grid;
 }
 
 
