@@ -1,8 +1,16 @@
 package com.walmart.springboot.utilities;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+
 
 
 /***
@@ -10,6 +18,8 @@ import org.springframework.stereotype.Service;
  * @author emrah
  *	READ application.properties file and Set Values! 
  */
+@EnableCaching
+@Configuration
 @Service
 @ConfigurationProperties("walmart")
 public class WalMartConfiguration {
@@ -19,10 +29,12 @@ public class WalMartConfiguration {
     private String uri4Items;
     private String uri4ItemDetails;
     private String uri4CustomerReviews;
-	
+	private Integer pageSize;
+    
 	//final String uri4taxonomy = "http://api.walmartlabs.com/v1/taxonomy?apiKey=r3ywye5qsf64vfrdhx8sv4f9&format=json";
 	//final String uri4Items = "http://api.walmartlabs.com/v1/paginated/items?category=3920&apiKey=r3ywye5qsf64vfrdhx8sv4f9&format=json";
 	
+   
 	public String getTaxonomyUri(){
 		return uri4taxonomy+"?apiKey="+apiKey;
 	}
@@ -84,5 +96,13 @@ public class WalMartConfiguration {
 
 	public void setUri4CustomerReviews(String uri4CustomerReviews) {
 		this.uri4CustomerReviews = uri4CustomerReviews;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 }

@@ -1,10 +1,15 @@
 package com.walmart.springboot.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerReviews {
+public class CustomerReviews implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8356551172086165882L;
 	private String itemId;
 	private String name;
 	private List<Review> reviews = new ArrayList<>();

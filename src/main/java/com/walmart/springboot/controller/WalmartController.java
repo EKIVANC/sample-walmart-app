@@ -23,14 +23,16 @@ import com.walmart.springboot.utilities.WalMartConfiguration;
 
 @Controller
 public class WalmartController {
-	
+
 	/*
-	 * Configuration is responsible to store configurable variables like service URLs 
-	 * it uses application.properties file  
+	 * Client is for making rest requests
 	 */
 	@Autowired
+	private WalmartClient mc;
+	
+	@Autowired
 	private WalMartConfiguration walMartConfiguration;
-
+	
 	/*
 	 * Serve the page with pagination functionalities
 	 */
@@ -38,10 +40,7 @@ public class WalmartController {
 	public ModelAndView index(@RequestParam(required = false) Integer page, HttpServletRequest request) {
 		
 		ModelAndView model = new ModelAndView("index");
-		/*
-		 * Client is for making rest requests
-		 */
-		WalmartClient mc = new WalmartClient(this.walMartConfiguration);
+		
 		List<BookItem> list = new ArrayList<BookItem>();
 		
 		/*
@@ -73,8 +72,9 @@ public class WalmartController {
 			}
 			else{
 				// this is for initial load!
-				list = mc.getBooks(null);
+				// list = mc.getBooks(null);
 				List<String> maxIds = new ArrayList<>();
+				list = mc.getBooks( maxIds);
 				maxIds.add( list.get(list.size()-1).getItemId() );
 				request.getSession().setAttribute("maxIds", maxIds);
 			}
@@ -90,7 +90,7 @@ public class WalmartController {
 			e.printStackTrace();
 			
 			/*
-			 * if errorMessage field is Setted, it will be displayed on page!   
+			 * if errorMessage field is Setted, it will be displayed on page as well  
 			 */
 			model.addObject("errorMessage", errorMessage);
 			return model;
@@ -104,7 +104,7 @@ public class WalmartController {
 		/*
 		 * Set Page Size - this was determined in assignmet spec
 		 */
-		pagedListHolder.setPageSize(20);
+		pagedListHolder.setPageSize(walMartConfiguration.getPageSize() );
 		model.addObject("maxPages", pagedListHolder.getPageCount());
 		request.getSession().setAttribute("maxPages",pagedListHolder.getPageCount());
 		
@@ -137,7 +137,7 @@ public class WalmartController {
 		/*
 		 * This client is responsible for making rest calls to walmart!
 		 */
-		WalmartClient mc = new WalmartClient(this.walMartConfiguration);
+//		WalmartClient mc = new WalmartClient(this.walMartConfiguration);
 		String errorMessage = null;
 		BookItemDetail bookDetail = null;
 		try {

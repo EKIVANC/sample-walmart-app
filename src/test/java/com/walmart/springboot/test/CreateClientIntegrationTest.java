@@ -14,7 +14,6 @@ import static org.mockito.BDDMockito.given;
 import com.walmart.springboot.controller.WalmartController;
 import com.walmart.springboot.model.BookItemDetail;
 import com.walmart.springboot.restclient.WalmartClient;
-import com.walmart.springboot.utilities.WalMartConfiguration;
 import com.walmart.springboot.utilities.WalmartException;
 
 import org.junit.rules.ExpectedException;
@@ -30,18 +29,14 @@ public class CreateClientIntegrationTest {
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
-
-	@Mock
-	private WalMartConfiguration walMartConfiguration;
 	
 	@Mock
 	private WalmartClient client;
 
 	@Before
 	public void setup() {
-		MockitoAnnotations.initMocks(this);
-		this.walMartConfiguration = new WalMartConfiguration(); 
-		this.client = new WalmartClient(walMartConfiguration);
+		MockitoAnnotations.initMocks(this); 
+		this.client = new WalmartClient();
 	}
 	
 	/*

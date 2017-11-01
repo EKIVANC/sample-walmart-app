@@ -1,7 +1,14 @@
 package com.walmart.springboot.model;
 
-public class BookItemDetail extends BookItem{
+import java.io.Serializable;
+
+public class BookItemDetail  extends BookItem implements Serializable {
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2682067628417516921L;
+	
 	private String longDescription;
 	private String largeImage;
 	private String isbn;

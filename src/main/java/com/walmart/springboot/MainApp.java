@@ -7,7 +7,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan(basePackages = {"hello","com.walmart.springboot"})
+@ComponentScan(basePackages = {"hello","com.walmart.springboot.*"})
 @EnableCaching
 @SpringBootApplication
 public class MainApp {

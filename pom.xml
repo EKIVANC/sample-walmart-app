@@ -24,10 +24,37 @@
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache</artifactId>
-		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
+		<!-- <dependency> <groupId>org.ehcache</groupId> <artifactId>ehcache</artifactId> 
+			<version>3.4.0</version> </dependency> -->
+
+		 <dependency>
+        <groupId>org.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+    
+  		<dependency>
+        	<groupId>javax.cache</groupId> <!-- JSR-107 API-->
+        	<artifactId>cache-api</artifactId>
+    	</dependency>
+    
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+
+
+
+
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -35,20 +62,20 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		
-		<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-test</artifactId>
-    <version>1.5.8.RELEASE</version>
-    <scope>test</scope>
-</dependency>
 
-<dependency>
-    <groupId>com.h2database</groupId>
-    <artifactId>h2</artifactId>
-    <scope>test</scope>
-    <version>1.4.194</version>
-</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>1.5.8.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+			<version>1.4.194</version>
+		</dependency>
 
 		<!-- JSTL tag lib -->
 		<dependency>
@@ -69,12 +96,12 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
-    <groupId>commons-lang</groupId>
-    <artifactId>commons-lang</artifactId>
-    <version>2.6</version>
-</dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
 
 	</dependencies>
 
