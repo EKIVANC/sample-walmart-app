@@ -113,7 +113,6 @@ public class WalmartController {
 		 * Set Page Size - this was determined in assignment and configured in application.properties file
 		 */
 		pagedListHolder.setPageSize(walMartConfiguration.getPageSize());
-		model.addObject("maxPages", pagedListHolder.getPageCount());
 		request.getSession().setAttribute("maxPages", pagedListHolder.getPageCount());
 
 		if (page == null || page < 1) {
@@ -128,6 +127,8 @@ public class WalmartController {
 			 */
 			pagedListHolder.setPage(page - 1);
 		}
+		
+		model.addObject("maxPages", pagedListHolder.getPageCount());
 		model.addObject("lists", pagedListHolder.getPageList());
 		model.addObject("page", page);
 
