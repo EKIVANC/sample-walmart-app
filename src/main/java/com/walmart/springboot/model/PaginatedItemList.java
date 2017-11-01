@@ -7,6 +7,11 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.walmart.springboot.model.BookItem;
 
+/**
+ * 
+ * @author emrah
+ * Walmart PaginatedItemList Entity
+ */
 public class PaginatedItemList implements Serializable {
 
 	/**

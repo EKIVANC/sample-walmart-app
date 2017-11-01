@@ -5,6 +5,11 @@ import org.ehcache.event.CacheEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/***
+ * Event Logger for better detail in logs 
+ * @author emrah
+ *
+ */
 public class EventLogger implements CacheEventListener<Object, Object>{
 
 	  private static final Logger LOGGER = LoggerFactory.getLogger(EventLogger.class);

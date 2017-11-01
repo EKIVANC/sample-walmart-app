@@ -18,33 +18,48 @@ import org.springframework.stereotype.Service;
 @ConfigurationProperties("walmart")
 public class WalMartConfiguration {
 
+	// special API key for client application
     private String apiKey;
+    
+    // For Taxonomy Service URL 
     private String uri4taxonomy;
+    
+    // For Products Service URL
     private String uri4Items;
+
+    // For Products Details Service URL
     private String uri4ItemDetails;
+    
+    // For Customer Review Service URL
     private String uri4CustomerReviews;
+
+    // For PageSize which is defined in SPEC document of the assignment
 	private Integer pageSize;
     
 	//final String uri4taxonomy = "http://api.walmartlabs.com/v1/taxonomy?apiKey=r3ywye5qsf64vfrdhx8sv4f9&format=json";
 	//final String uri4Items = "http://api.walmartlabs.com/v1/paginated/items?category=3920&apiKey=r3ywye5qsf64vfrdhx8sv4f9&format=json";
 	
-   
+	// create a complete URL
 	public String getTaxonomyUri(){
 		return uri4taxonomy+"?apiKey="+apiKey;
 	}
-	
+
+	// create a complete URL
 	public String getUri4Items(String category){
 		return uri4Items+"?category="+category+"&apiKey="+apiKey;
 	}
 	
+	// create a complete URL
 	public String getUri4Items(String category, String maxId){
 		return uri4Items+"?category="+category+"&maxId="+maxId+"&apiKey="+apiKey;
 	}
 	
+	// create a complete URL
 	public String getUri4ItemDetails(String itemId){
 		return uri4ItemDetails+"/"+itemId+"?apiKey="+apiKey;
 	}
 	
+	// create a complete URL
 	public String getUri4CustomerReviews(String itemId){
 		return uri4CustomerReviews+"/"+itemId+"?apiKey="+apiKey;
 	}

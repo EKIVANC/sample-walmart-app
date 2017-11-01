@@ -1,7 +1,13 @@
 package com.walmart.springboot.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
+/**
+ * 
+ * @author emrah
+ * Walmart BookItem Entity
+ */
 public class BookItem implements Serializable{
 	
 	/**
@@ -12,8 +18,8 @@ public class BookItem implements Serializable{
 	private String thumbnailImage;
 	private String mediumImage;
 	private String name;
-	private String msrp;
-	private String salePrice;
+	private BigDecimal msrp;
+	private BigDecimal salePrice;
 	private String itemId;
 	
 	public String getThumbnailImage() {
@@ -28,18 +34,7 @@ public class BookItem implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getMsrp() {
-		return msrp;
-	}
-	public void setMsrp(String msrp) {
-		this.msrp = msrp;
-	}
-	public String getSalePrice() {
-		return salePrice;
-	}
-	public void setSalePrice(String salePrice) {
-		this.salePrice = salePrice;
-	}
+
 	public String getItemId() {
 		return itemId;
 	}
@@ -52,4 +47,24 @@ public class BookItem implements Serializable{
 	public void setMediumImage(String mediumImage) {
 		this.mediumImage = mediumImage;
 	}
+	public BigDecimal getMsrp() {
+		return msrp;
+	}
+	public void setMsrp(BigDecimal msrp) {
+		if (msrp!= null){
+			msrp = msrp.setScale(2, BigDecimal.ROUND_HALF_UP);	
+		}
+		this.msrp = msrp;
+	}
+	public BigDecimal getSalePrice() {
+		return salePrice;
+	}
+	public void setSalePrice(BigDecimal salePrice) {
+		if (salePrice!= null){
+			salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+		}
+		this.salePrice = salePrice;
+	}
+	
+	
 }

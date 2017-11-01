@@ -86,9 +86,10 @@
 		<c:url value="/" var="next">
 			<c:param name="page" value="${page + 1}" />
 		</c:url>
-		<c:if test="${page + 1 <= maxPages}">
+		
+		<%--AlWAYS SHOW NEXT <c:if test="${page + 1 <= maxPages}"> --%>
 			<a href='<c:out value="${next}" />' class="pn next">Next</a>
-		</c:if>
+		<%-- </c:if> --%>
 	</div>
 
 	</c:if>

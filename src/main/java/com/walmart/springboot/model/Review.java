@@ -2,6 +2,11 @@ package com.walmart.springboot.model;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author emrah
+ * Walmart Review Entity
+ */
 public class Review implements Serializable{
 	
 	/**

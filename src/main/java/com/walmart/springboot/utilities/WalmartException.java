@@ -12,6 +12,7 @@ public class WalmartException extends Exception{
 	 */
 	private static final long serialVersionUID = -806368822229633393L;
 
+	// Custom message for application
 	private String exceptionMessage;
 	 
 	public WalmartException(String exceptionMessage) {

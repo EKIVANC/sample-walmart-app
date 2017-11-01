@@ -1,7 +1,13 @@
 package com.walmart.springboot.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
+/**
+ * 
+ * @author emrah
+ * Walmart BookItem Detail Entity  Extends from BookItem
+ */
 public class BookItemDetail  extends BookItem implements Serializable {
 		
 	/**
@@ -12,7 +18,7 @@ public class BookItemDetail  extends BookItem implements Serializable {
 	private String longDescription;
 	private String largeImage;
 	private String isbn;
-	private String standardShipRate;
+	private BigDecimal standardShipRate;
 	private String stock;
 	private String customerRating;
 	private String customerRatingImage;
@@ -33,12 +39,6 @@ public class BookItemDetail  extends BookItem implements Serializable {
 		this.largeImage = largeImage;
 	}
 
-	public String getStandardShipRate() {
-		return standardShipRate;
-	}
-	public void setStandardShipRate(String standardShipRate) {
-		this.standardShipRate = standardShipRate;
-	}
 	public String getCustomerRating() {
 		return customerRating;
 	}
@@ -74,5 +74,14 @@ public class BookItemDetail  extends BookItem implements Serializable {
 	}
 	public void setShipToStore(boolean shipToStore) {
 		this.shipToStore = shipToStore;
+	}
+	public BigDecimal getStandardShipRate() {
+		return standardShipRate;
+	}
+	public void setStandardShipRate(BigDecimal standardShipRate) {
+		if (standardShipRate!= null){
+			standardShipRate = standardShipRate.setScale(2, BigDecimal.ROUND_HALF_UP);
+		}
+		this.standardShipRate = standardShipRate;
 	}
 }

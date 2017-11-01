@@ -7,6 +7,11 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.walmart.springboot.model.Categories;
 
+/**
+ * 
+ * @author emrah
+ * Walmart Categories Entity
+ */
 public class Categories implements Serializable{
 	
 	/**

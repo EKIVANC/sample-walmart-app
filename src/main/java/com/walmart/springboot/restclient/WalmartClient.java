@@ -32,6 +32,7 @@ public class WalmartClient {
 	/*
 	 * Configurable parameters are stored in application.properties file
 	 * the file is accessed by walMartConfiguration class
+	 * initiated via dependency injection
 	 */
 	@Autowired(required=true)
 	private WalMartConfiguration walMartConfiguration;

@@ -6,6 +6,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 
+ * @author emrah
+ * Walmart Category Entity
+ */
 public class Category implements Serializable{
 
 	/**

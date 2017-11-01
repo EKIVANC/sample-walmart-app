@@ -64,17 +64,18 @@ public class WalmartController {
 				 * Products Service can be called again when needed
 				 */
 				List<String> maxIds = (List<String>) request.getSession().getAttribute("maxIds");
-				list = mc.getBooks(maxIds);
+				list = mc.getBooks( maxIds );
 				maxIds.add(list.get(list.size() - 1).getItemId());
 				request.getSession().setAttribute("maxIds", maxIds);
 
 			} 
 			// fetch on current batch
 			else if (page != null && page != 0 && request.getSession().getAttribute("maxPages") != null
-					& page < (Integer) request.getSession().getAttribute("maxPages")) {
+					&& page < (Integer) request.getSession().getAttribute("maxPages")) {
 				
 				List<String> maxIds = (List<String>) request.getSession().getAttribute("maxIds");
-				list = mc.getBooks((maxIds.size() > 1 ? maxIds.subList(0, maxIds.size() - 1) : null));
+				// never call cachable method with null values
+				list = mc.getBooks((maxIds.size() > 1 ? maxIds.subList(0, maxIds.size() - 1) : new ArrayList<>() ));
 			} else {
 				// Initial load!
 				List<String> maxIds = new ArrayList<>();
